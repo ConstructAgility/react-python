@@ -23,10 +23,13 @@ class TestJSXTransformer(TestCase):
     def test_transform(self):
         jsx_path = join(TEST_ROOT, 'files/test.jsx')
         js_path = join(TEST_ROOT, 'files/test.js')
+        js_source = join(TEST_ROOT, 'files/test_source.js')
+
+        jsx_str = jsx.transform(jsx_path, js_path=js_source)
 
         with open(js_path, 'rU') as js:
             self.assertEquals(
-                jsx.transform(jsx_path),
+                jsx_str,
                 unicode(js.read()))
 
         malformed_path = join(TEST_ROOT, 'files/malformed.jsx')
